@@ -6,10 +6,10 @@ class Category(models.Model):
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
 
-    category = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.category
+        return self.name
 
 
 class Product(models.Model):
@@ -18,11 +18,12 @@ class Product(models.Model):
         verbose_name_plural = 'Produtos'
 
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     stock = models.PositiveIntegerField()
     barcode = models.CharField(max_length=255)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True
+        Category, on_delete=models.SET_NULL, null=True,
+        blank=True
     )
 
     def __str__(self):

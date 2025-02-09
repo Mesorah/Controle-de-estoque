@@ -8,6 +8,9 @@ class Category(models.Model):
 
     category = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.category
+
 
 class Product(models.Model):
     class Meta:
@@ -17,7 +20,10 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     stock = models.PositiveIntegerField()
-    barcode = models.PositiveIntegerField()
+    barcode = models.CharField(max_length=255)
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True
     )
+
+    def __str__(self):
+        return self.name

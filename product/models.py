@@ -25,6 +25,8 @@ class Product(models.Model):
         Category, on_delete=models.SET_NULL, null=True,
         blank=True
     )
+    cost_price = models.FloatField(null=True, default=0)
+    sale_price = models.FloatField(null=True, default=0)
 
     def __str__(self):
         return self.name

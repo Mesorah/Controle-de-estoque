@@ -8,7 +8,7 @@ class HomeListView(ListView):
     queryset = None
     model = models.Product
     # paginate_by = None
-    context_object_name = 'product'
+    context_object_name = 'products'
     # paginator_class = Paginator
     ordering = '-id'
-    template_name = 'base.html'
+    template_name = 'product/home.html'

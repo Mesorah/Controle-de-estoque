@@ -1,21 +1,25 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
     <div>
         <div>
             {% for product in products %}
                 <div>
-                    <p>{{ product.name }}</p>
+                    <p>{% translate "Product Name" %}: {{ product.name }}</p>
                 </div>
 
                 <div>
-                    <p>{{ product.stock }}</p>
-                    <p>{{ product.barcode }}</p>
-                    <p>{{ product.category }}</p>
+                    <p>{% translate "Stock" %}: {{ product.stock }}</p>
+                    <p>{% translate "Barcode" %}: {{ product.barcode }}</p>
+                    <p>{% translate "Category" %}: {{ product.category }}</p>
                 </div>
 
                 <div>
-                    <p>{{ product.cost_price }} {{ product.sale_price }}</p>
+                    <p>
+                        {% translate "Cost Price" %}: {{ product.cost_price }}
+                        {% translate "Sale Price" %}: {{ product.sale_price }}
+                    </p>
                 </div>
             {% endfor %}
         </div>

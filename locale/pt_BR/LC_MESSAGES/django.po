@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 20:06-0300\n"
+"POT-Creation-Date: 2025-02-15 13:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: .\global_templates\global\partials\header.html:5
 msgid "Stock Control"
 msgstr "Controle de Estoque"
@@ -26,3 +27,27 @@ msgstr "Controle de Estoque"
 #: .\global_templates\global\partials\header.html:12
 msgid "Search"
 msgstr "Pesquisar"
+
+#: .\product\templates\product\home.html:9
+msgid "Product Name"
+msgstr "Nome do Produto"
+
+#: .\product\templates\product\home.html:13
+msgid "Stock"
+msgstr "Estoque"
+
+#: .\product\templates\product\home.html:14
+msgid "Barcode"
+msgstr "Código de Barras"
+
+#: .\product\templates\product\home.html:15
+msgid "Category"
+msgstr "Categoria"
+
+#: .\product\templates\product\home.html:20
+msgid "Cost Price"
+msgstr "Preço de Custo"
+
+#: .\product\templates\product\home.html:21
+msgid "Sale Price"
+msgstr "Preço de Venda"

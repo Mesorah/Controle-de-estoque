@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import path
 
 from product import views
@@ -5,7 +6,9 @@ from product import views
 urlpatterns = [
     path(
         '',
-        views.HomeListView.as_view(),
+        staff_member_required(
+            views.HomeListView.as_view(),
+        ),
         name='home'
     ),
 ]

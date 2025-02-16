@@ -2,13 +2,13 @@
 
 <div class="header">
     <div class="header-text">
-        <p>{% translate "Stock Control" %}</p>
+        <a href="{% url 'product:home' %}"><p>{% translate "Stock Control" %}</p></a>
     </div>
 
     <div class="search-container">
         <form action="{% url 'product:search' %}" method="GET">
             <label for="search">{% translate "Search" %}:</label>
-            <input type="search" id="search" name="search" placeholder="{% translate "Search" %}...">
+            <input type="search" id="search" name="search" placeholder="{% translate "Search" %}..." required>
             <button type="submit">{% translate "Search" %}</button>
         </form>
     </div>

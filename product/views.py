@@ -37,7 +37,7 @@ class HomeListView(BaseProductMixin):
 class ProductSearch(BaseProductMixin):
     def get_queryset(self):
         qs = super().get_queryset()
-        query = self.request.GET.get('search')
+        query = self.request.GET.get('search').strip()
 
         qs = qs.filter(
             Q(name__icontains=query) |

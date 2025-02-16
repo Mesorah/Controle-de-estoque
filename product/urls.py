@@ -17,7 +17,10 @@ urlpatterns = [
 
     path(
         'search/',
-        views.ProductSearch.as_view(),
+        staff_member_required(
+            views.ProductSearch.as_view(),
+            login_url=reverse_lazy('authors:login')
+        ),
         name='search'
     )
 ]

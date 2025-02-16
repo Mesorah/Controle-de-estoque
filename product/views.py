@@ -1,3 +1,4 @@
+from django.utils import translation
 from django.views.generic import ListView
 
 from product import models
@@ -10,3 +11,12 @@ class HomeListView(ListView):
     context_object_name = 'products'
     ordering = '-id'
     template_name = 'product/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        html_language = translation.get_language()
+
+        context['html_language'] = html_language
+
+        return context

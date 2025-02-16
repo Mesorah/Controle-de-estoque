@@ -9,7 +9,7 @@
         <form>
             <label for="search">{% translate "Search" %}:</label>
             <input type="search" id="search" name="search" placeholder="{% translate " Search" %}...">
-            <button type="submit">{% translate "Search" %}:</button>
+            <button type="submit">{% translate "Search" %}</button>
         </form>
     </div>
 
@@ -17,7 +17,7 @@
         {% if request.user %}
             <form action="{% url "authors:logout" %}" method="post">
                 {% csrf_token %}
-                <button type="submit">Logout</button>
+                <button type="submit">{% translate "Logout" %}</button>
             </form>
         {% endif %}
     </div>

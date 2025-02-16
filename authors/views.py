@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
@@ -11,7 +12,7 @@ class AuthorLoginView(LoginView):
         return self.success_url
 
 
-class AuthorLogoutView(LogoutView):
+class AuthorLogoutView(LoginRequiredMixin, LogoutView):
     success_url = reverse_lazy('authors:login')
 
     def get_redirect_url(self):

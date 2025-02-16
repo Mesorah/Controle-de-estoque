@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-16 13:35-0300\n"
+"POT-Creation-Date: 2025-02-16 19:11-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,14 +23,9 @@ msgid "Stock Control"
 msgstr "Controle de Estoque"
 
 #: .\global_templates\global\partials\header.html:10
+#: .\global_templates\global\partials\header.html:11
 #: .\global_templates\global\partials\header.html:12
 msgid "Search"
-msgstr "Pesquisar"
-
-#: .\global_templates\global\partials\header.html:11
-#, fuzzy
-#| msgid "Search"
-msgid " Search"
 msgstr "Pesquisar"
 
 #: .\global_templates\global\partials\header.html:20
@@ -80,3 +75,8 @@ msgstr "Preço de Custo"
 #: .\product\templates\product\home.html:21
 msgid "Sale Price"
 msgstr "Preço de Venda"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid " Search"
+#~ msgstr "Pesquisar"

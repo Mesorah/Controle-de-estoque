@@ -14,4 +14,10 @@ urlpatterns = [
         ),
         name='home'
     ),
+
+    path(
+        'search/',
+        views.ProductSearch.as_view(),
+        name='search'
+    )
 ]

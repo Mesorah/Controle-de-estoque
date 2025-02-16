@@ -6,7 +6,7 @@
     </div>
 
     <div class="search-container">
-        <form>
+        <form action="{% url 'product:search' %}" method="GET">
             <label for="search">{% translate "Search" %}:</label>
             <input type="search" id="search" name="search" placeholder="{% translate "Search" %}...">
             <button type="submit">{% translate "Search" %}</button>
@@ -15,7 +15,7 @@
 
     <div>
         {% if request.user %}
-            <form action="{% url "authors:logout" %}" method="post">
+            <form action="{% url 'authors:logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit">{% translate "Logout" %}</button>
             </form>

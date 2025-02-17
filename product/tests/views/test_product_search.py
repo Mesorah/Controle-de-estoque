@@ -1,20 +1,15 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
 from product.models import Product
+from utils.tests.user import create_super_user
 
 
 class TestProductSearch(TestCase):
     def setUp(self):
-        data = {
-            'username': 'TestSuperUserUsername',
-            'password': 'TestSuperUserPassword123'
-        }
+        username, password = create_super_user()
 
-        User.objects.create_superuser(**data)
-
-        self.client.login(**data)
+        self.client.login(username=username, password=password)
 
         product_data = {
             'name': 'TestProductName',

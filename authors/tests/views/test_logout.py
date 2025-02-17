@@ -1,19 +1,14 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+
+from utils.tests.user import create_super_user
 
 
 class TestLogout(TestCase):
     def setUp(self):
-        User.objects.create_user(
-            username='usernameTest',
-            password='passwordTest123'
-        )
+        username, password = create_super_user()
 
-        self.client.login(
-            username='usernameTest',
-            password='passwordTest123'
-        )
+        self.client.login(username=username, password=password)
 
         return super().setUp()
 

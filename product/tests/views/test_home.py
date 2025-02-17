@@ -1,18 +1,14 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+
+from utils.tests.user import create_super_user
 
 
 class TestHome(TestCase):
     def setUp(self):
-        data = {
-            'username': 'TestSuperUserUsername',
-            'password': 'TestSuperUserPassword123'
-        }
+        username, password = create_super_user()
 
-        User.objects.create_superuser(**data)
-
-        self.client.login(**data)
+        self.client.login(username=username, password=password)
 
         return super().setUp()
 

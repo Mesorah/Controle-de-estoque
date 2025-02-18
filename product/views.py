@@ -1,8 +1,10 @@
 from django.db.models import Q
+from django.shortcuts import render
 from django.utils import translation
+from django.views import View
 from django.views.generic import ListView
 
-from product import models
+from product import forms, models
 
 
 class BaseProductMixin(ListView):
@@ -31,7 +33,11 @@ class BaseProductMixin(ListView):
 
 
 class HomeListView(BaseProductMixin):
-    pass
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        print(self.request.session.get('products'), 'euu')
+
+        return ctx
 
 
 class ProductSearch(BaseProductMixin):
@@ -46,3 +52,60 @@ class ProductSearch(BaseProductMixin):
         )
 
         return qs
+
+
+class CreateProduct(View):
+    def return_render(self, form):
+        return render(self.request, 'product/create.html', context={
+            'form': form
+        })
+
+    def get(self, *args, **kwargs):
+        form = forms.CreateProductForm()
+
+        return self.return_render(form)
+
+    def post(self, *args, **kwargs):
+        # del self.request.session['products']
+        products = self.request.session.get('products')
+
+        if not products:
+            id_variation = 0
+            products = self.request.session['products'] = {}
+            products[id_variation] = {
+                'id': 0
+            }
+        else:
+            max_number = 0
+            for product in products:
+                max_number = max(max_number, int(product))
+
+            id_variation = max_number
+
+        form = forms.CreateProductForm(self.request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            description = form.cleaned_data.get('description')
+            stock = form.cleaned_data.get('stock')
+            barcode = form.cleaned_data.get('barcode')
+            category = form.cleaned_data.get('category')
+            cost_price = form.cleaned_data.get('cost_price')
+            sale_price = form.cleaned_data.get('sale_price')
+            id_variation += 1
+
+        products[id_variation] = {
+            'name': name,
+            'description': description,
+            'stock': stock,
+            'barcode': barcode,
+            'category': category.name,
+            'cost_price': cost_price,
+            'sale_price': sale_price
+        }
+
+        self.request.session['products'] = products
+
+        print(self.request.session.get('products'))
+
+        return self.return_render(form)

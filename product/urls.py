@@ -22,5 +22,14 @@ urlpatterns = [
             login_url=reverse_lazy('authors:login')
         ),
         name='search'
-    )
+    ),
+
+    path(
+        'create/',
+        staff_member_required(
+            views.CreateProduct.as_view(),
+            login_url=reverse_lazy('authors:login')
+        ),
+        name='create'
+    ),
 ]

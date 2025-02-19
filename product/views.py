@@ -94,17 +94,20 @@ class CreateProduct(View):
             sale_price = form.cleaned_data.get('sale_price')
             id_variation += 1
 
-        products[id_variation] = {
-            'name': name,
-            'description': description,
-            'stock': stock,
-            'barcode': barcode,
-            'category': category.name,
-            'cost_price': cost_price,
-            'sale_price': sale_price
-        }
+            products[id_variation] = {
+                'name': name,
+                'description': description,
+                'stock': stock,
+                'barcode': barcode,
+                'category': category.name,
+                'cost_price': cost_price,
+                'sale_price': sale_price
+            }
 
-        self.request.session['products'] = products
+            self.request.session['products'] = products
+        else:
+            form = forms.CreateProductForm(self.request.POST)
+            print(form.errors)
 
         print(self.request.session.get('products'))
 

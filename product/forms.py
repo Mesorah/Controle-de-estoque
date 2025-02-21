@@ -18,12 +18,14 @@ class CreateProductForm(forms.ModelForm):
         ]
 
     def clean_barcode(self):
-        barcoce = self.cleaned_data['barcode']
+        barcode = self.cleaned_data['barcode']
 
-        if len(barcoce) != 13:
+        if len(barcode) != 13:
             self.add_error(
                 'barcode', 'The size of barcode field has to be 13 digits'
             )
+
+        return barcode
 
     def __init__(self, *args, **kwargs):
         super(CreateProductForm, self).__init__(*args, **kwargs)

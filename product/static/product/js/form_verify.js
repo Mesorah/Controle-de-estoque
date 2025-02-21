@@ -28,8 +28,10 @@ class FormVerify {
         }
     
         for(const element of elements) {
-            if(!element.value) this.addError(element, 'Incomplete field');
-            valid = false;
+            if(!element.value) {
+                this.addError(element, 'Incomplete field');
+                valid = false;
+            }
         }
     
         const barcode = document.getElementById('id_barcode');
@@ -41,7 +43,7 @@ class FormVerify {
         const priceVerification = this.verifyPrice(costPrice, salePrice);
     
         if (valid && barcodeVerification && priceVerification) {
-            return true
+            return true;
         }
 
         return false;

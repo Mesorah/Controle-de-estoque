@@ -17,6 +17,12 @@ class CreateProductForm(forms.ModelForm):
             'sale_price'
         ]
 
+    def clean_description(self):
+        description = self.cleaned_data['description']
+
+        if len(description) == 0:
+            self.add_error('description', 'Incomplete field')
+
     def clean_barcode(self):
         barcode = self.cleaned_data['barcode']
 
@@ -26,6 +32,25 @@ class CreateProductForm(forms.ModelForm):
             )
 
         return barcode
+
+    def clean_sale_price(self):
+        cost_price = self.cleaned_data['cost_price']
+        sale_price = self.cleaned_data['sale_price']
+
+        if cost_price <= 0:
+            self.add_error(
+                'cost_price',
+                'The cost price cannot be less than or equal to zero'
+            )
+
+        if cost_price > sale_price or cost_price == sale_price:
+            self.add_error(
+                'cost_price',
+                ('The cost price cannot be greater than or equal'
+                 'to the selling price')
+            )
+
+        return sale_price
 
     def __init__(self, *args, **kwargs):
         super(CreateProductForm, self).__init__(*args, **kwargs)

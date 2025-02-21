@@ -65,9 +65,9 @@ class FormVerify {
     
         let valid = true;
     
-        if(costPriceFloat === 0) {
+        if(costPriceFloat <= 0) {
             this.addError(
-                costPrice, 'The cost price cannot be 0'
+                costPrice, 'The cost price cannot be less than or equal to zero'
             );
     
             valid = false;

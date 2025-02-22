@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.utils import translation
 from django.views import View
 from django.views.generic import ListView
@@ -54,15 +54,12 @@ class ProductSearch(BaseProductMixin):
 
 
 class CreateProduct(View):
-    def return_render(self, form):
-        return render(self.request, 'product/create.html', context={
-            'form': form
-        })
-
     def get(self, *args, **kwargs):
         form = forms.CreateProductForm()
 
-        return self.return_render(form)
+        return render(self.request, 'product/create.html', context={
+            'form': form
+        })
 
     def init_product(self):
         id_variation = 0
@@ -138,4 +135,4 @@ class CreateProduct(View):
 
         print(self.request.session.get('products'))
 
-        return self.return_render(form)
+        return redirect('product:home')

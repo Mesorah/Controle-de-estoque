@@ -54,12 +54,15 @@ class ProductSearch(BaseProductMixin):
 
 
 class CreateProduct(View):
-    def get(self, *args, **kwargs):
-        form = forms.CreateProductForm()
-
+    def return_render(self, form):
         return render(self.request, 'product/create.html', context={
             'form': form
         })
+
+    def get(self, *args, **kwargs):
+        form = forms.CreateProductForm()
+
+        return self.return_render(form)
 
     def init_product(self):
         id_variation = 0
@@ -129,10 +132,12 @@ class CreateProduct(View):
 
             self.request.session['products'] = products
             self.request.session.modified = True
+
+            return redirect('product:home')
         else:
             form = forms.CreateProductForm(self.request.POST)
             print(form.errors)
 
         print(self.request.session.get('products'))
 
-        return redirect('product:home')
+        return self.return_render(form)

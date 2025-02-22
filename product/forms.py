@@ -33,15 +33,20 @@ class CreateProductForm(forms.ModelForm):
 
         return barcode
 
-    def clean_sale_price(self):
+    def clean_cost_price(self):
         cost_price = self.cleaned_data['cost_price']
-        sale_price = self.cleaned_data['sale_price']
 
         if cost_price <= 0:
             self.add_error(
                 'cost_price',
                 'The cost price cannot be less than or equal to zero'
             )
+
+        return cost_price
+
+    def clean_sale_price(self):
+        cost_price = self.cleaned_data['cost_price']
+        sale_price = self.cleaned_data['sale_price']
 
         if cost_price > sale_price or cost_price == sale_price:
             self.add_error(

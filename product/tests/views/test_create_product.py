@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from product.models import Category
+from utils.tests.product import create_session_product
 from utils.tests.user import create_super_user
 
 
@@ -10,17 +10,7 @@ class TestCreateProduct(TestCase):
         username, password = create_super_user()
         self.client.login(username=username, password=password)
 
-        category = Category.objects.create(name='TestCategory')
-
-        self.data = {
-            'name': 'TestProduct',
-            'description': 'TestDescription',
-            'stock': 10,
-            'barcode': '1111111111111',
-            'category': category.id,
-            'cost_price': 5.99,
-            'sale_price': 7.99
-        }
+        self.data = create_session_product()
 
         return super().setUp()
 

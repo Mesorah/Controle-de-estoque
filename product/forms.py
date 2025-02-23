@@ -23,6 +23,8 @@ class CreateProductForm(forms.ModelForm):
         if len(description) == 0:
             self.add_error('description', 'Incomplete field')
 
+        return description
+
     def clean_barcode(self):
         barcode = self.cleaned_data['barcode']
 

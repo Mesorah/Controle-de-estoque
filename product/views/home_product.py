@@ -1,5 +1,7 @@
 from django.db.models import Q
+from django.shortcuts import redirect, render
 from django.utils import translation
+from django.views import View
 from django.views.generic import ListView
 
 from product import models
@@ -46,3 +48,34 @@ class ProductSearch(BaseProductMixin):
         )
 
         return qs
+
+
+class Dashboard(View):
+    def return_render(self, session):
+        return render(self.request, 'product/dashboard.html', context={
+            'products': session
+        })
+
+    def get(self, *args, **kwargs):
+        session = self.request.session.get('products')
+
+        if not session:
+            return redirect('product:home')
+
+        return self.return_render(session)
+
+    def post(self, *args, **kwargs):
+        session = self.request.session.get('products')
+
+        if session:
+            for product in session.values():
+                category = models.Category.objects.filter(
+                    name=product['category']
+                ).first()
+
+                product['category'] = category
+                models.Product.objects.create(**product)
+
+            del self.request.session['products']
+
+        return redirect('product:home')

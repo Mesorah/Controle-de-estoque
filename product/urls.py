@@ -32,4 +32,13 @@ urlpatterns = [
         ),
         name='create'
     ),
+
+    path(
+        'dashboard/',
+        staff_member_required(
+            views.Dashboard.as_view(),
+            login_url=reverse_lazy('authors:login')
+        ),
+        name='dashboard'
+    ),
 ]

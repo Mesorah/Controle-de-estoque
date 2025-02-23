@@ -1,0 +1,23 @@
+<div>
+    <div>
+        {% for key, product in products.items %}
+            <p>Nome: {{ product.name }}</p>
+            <p>Descrição: {{ product.description }}</p>
+            <p>Estoque: {{ product.stock }}</p>
+            <p>Código de barras: {{ product.barcode }}</p>
+            <p>Categoria: {{ product.category }}</p>
+            <p>Preço de custo: R$ {{ product.cost_price }}</p>
+            <p>Preço de venda: R$ {{ product.sale_price }}</p>
+    
+            <br>
+        {% endfor %}
+    </div>
+    
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+    
+            <button type="submit">Salvar produtos</button>
+        </form>
+    </div>
+</div>

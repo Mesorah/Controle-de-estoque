@@ -82,6 +82,12 @@ class CreateProduct(View):
             self.set_product(products, id_variation, attributes)
 
             self.request.session['products'] = products
+
+            try:
+                del products[0]
+            except KeyError:
+                pass
+
             self.request.session.modified = True
 
             return redirect('product:home')

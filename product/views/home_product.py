@@ -58,6 +58,7 @@ class Dashboard(View):
 
     def get(self, *args, **kwargs):
         session = self.request.session.get('products')
+        # raise KeyError(session)
 
         if not session:
             return redirect('product:home')

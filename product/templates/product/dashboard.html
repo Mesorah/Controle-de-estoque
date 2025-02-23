@@ -8,6 +8,12 @@
             <p>Categoria: {{ product.category }}</p>
             <p>Preço de custo: R$ {{ product.cost_price }}</p>
             <p>Preço de venda: R$ {{ product.sale_price }}</p>
+
+            <form action="{% url 'product:delete' key %}" method="post">
+                {% csrf_token %}
+
+                <button type="submit">Remover</button>
+            </form>
     
             <br>
         {% endfor %}

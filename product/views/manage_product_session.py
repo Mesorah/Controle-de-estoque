@@ -99,4 +99,10 @@ class CreateProductSession(View):
 
 
 class DeleteProductSession(View):
-    pass
+    def post(self, request, id, *args, **kwargs):
+        session = self.request.session['products']
+        del session[id]
+
+        self.request.session.modified = True
+
+        return redirect('product:dashboard')

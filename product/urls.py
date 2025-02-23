@@ -27,7 +27,7 @@ urlpatterns = [
     path(
         'create/',
         staff_member_required(
-            views.CreateProduct.as_view(),
+            views.CreateProductSession.as_view(),
             login_url=reverse_lazy('authors:login')
         ),
         name='create'

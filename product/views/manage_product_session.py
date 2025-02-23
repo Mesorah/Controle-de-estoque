@@ -4,7 +4,7 @@ from django.views import View
 from product import forms
 
 
-class CreateProduct(View):
+class CreateProductSession(View):
     def return_render(self, form):
         return render(self.request, 'product/create.html', context={
             'form': form
@@ -96,3 +96,7 @@ class CreateProduct(View):
             print(form.errors)
 
         return self.return_render(form)
+
+
+class DeleteProductSession(View):
+    pass

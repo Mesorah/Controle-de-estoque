@@ -1,8 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.utils import translation
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView
 
 from product import models
 
@@ -34,6 +35,14 @@ class BaseProductMixin(ListView):
 
 class HomeListView(BaseProductMixin):
     pass
+
+
+class UpdateProduct(UpdateView):
+    model = models.Product
+    context_object_name = 'product'
+    template_name = 'product/form.html'
+    fields = '__all__'
+    success_url = reverse_lazy('product:home')
 
 
 class ProductSearch(BaseProductMixin):

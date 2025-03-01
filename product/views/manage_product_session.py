@@ -6,7 +6,7 @@ from product import forms
 
 class CreateProductSession(View):
     def return_render(self, form):
-        return render(self.request, 'product/create.html', context={
+        return render(self.request, 'product/form.html', context={
             'form': form
         })
 
@@ -96,6 +96,10 @@ class CreateProductSession(View):
             print(form.errors)
 
         return self.return_render(form)
+
+
+class UpdateProductSession(View):
+    pass
 
 
 class DeleteProductSession(View):

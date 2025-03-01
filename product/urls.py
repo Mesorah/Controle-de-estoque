@@ -34,6 +34,15 @@ urlpatterns = [
     ),
 
     path(
+        'update/<int:pk>/',
+        staff_member_required(
+            views.UpdateProduct.as_view(),
+            login_url=reverse_lazy('authors:login')
+        ),
+        name='update'
+    ),
+
+    path(
         'delete/<str:id>/',
         staff_member_required(
             views.DeleteProductSession.as_view(),

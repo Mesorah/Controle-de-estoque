@@ -1,6 +1,6 @@
 class FormVerify {
     constructor() {
-        this.form = document.querySelector('.create-product-form');
+        this.form = document.querySelector('.product-form');
         this.form.addEventListener('submit', (e) => {
             e.preventDefault();
             if(this.validateFormInputs()) this.form.submit();

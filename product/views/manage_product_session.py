@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views import View
 
@@ -105,11 +106,20 @@ class CreateProductSession(ProductSession):
 
 
 class UpdateProductSession(ProductSession):
-    def get(self, request, id, *args, **kwargs):
-        product = self.request.session.get('products')[str(id)]
+    def set_category_product(self, product):
         product['category'] = models.Category.objects.filter(
             name=product['category']
         ).first()
+
+        return product
+
+    def get(self, request, id, *args, **kwargs):
+        try:
+            product = self.request.session.get('products')[str(id)]
+        except (TypeError, KeyError):
+            return redirect('product:dashboard')
+
+        self.set_category_product(product)
 
         form = forms.CreateProductForm(initial=product)
 
@@ -117,22 +127,25 @@ class UpdateProductSession(ProductSession):
 
     def post(self, request, id, *args, **kwargs):
         products = self.request.session.get('products')
-        form = forms.CreateProductForm(self.request.POST)
+        product = products[str(id)]
+        self.set_category_product(product)
 
+        form = forms.CreateProductForm(self.request.POST)
         if form.is_valid():
             attributes = self.get_attributes(form)
 
             self.set_product(products, str(id), attributes)
 
-            product = products[str(id)]
+            product = products[str(id)]  # Criando novamente para atualizar
 
             self.request.session['products'][str(id)] = product
 
             self.request.session.modified = True
 
-            print(self.request.session['products'])
+            return redirect('product:dashboard')
         else:
-            form = forms.CreateProductForm(initial=attributes)
+            form = forms.CreateProductForm(initial=product)
+            messages.add_message(request, messages.ERROR, "Form error")
 
         return self.return_render(form)
 

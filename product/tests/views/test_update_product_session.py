@@ -5,7 +5,7 @@ from utils.tests.product import create_session_product
 from utils.tests.user import create_super_user
 
 
-class UpdateProductSession(TestCase):
+class DeleteProductSession(TestCase):
     def setUp(self):
         username, password = create_super_user()
         self.client.login(username=username, password=password)

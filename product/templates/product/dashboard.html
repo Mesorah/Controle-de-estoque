@@ -14,9 +14,12 @@
 
                 <button type="submit">Remover</button>
             </form>
-    
+
+            <a href="{% url 'product:update_session' key %}">Update</a>
+
             <br>
         {% endfor %}
+
     </div>
     
     <div>

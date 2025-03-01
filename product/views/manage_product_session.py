@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render
 from django.views import View
 
-from product import forms
+from product import forms, models
 
 
-class CreateProductSession(View):
+class ProductSession(View):
     def return_render(self, form):
         return render(self.request, 'product/form.html', context={
             'form': form
@@ -90,6 +90,8 @@ class CreateProductSession(View):
 
             self.request.session.modified = True
 
+            print(self.request.session['products'])
+
             return redirect('product:home')
         else:
             form = forms.CreateProductForm(self.request.POST)
@@ -98,8 +100,41 @@ class CreateProductSession(View):
         return self.return_render(form)
 
 
-class UpdateProductSession(View):
+class CreateProductSession(ProductSession):
     pass
+
+
+class UpdateProductSession(ProductSession):
+    def get(self, request, id, *args, **kwargs):
+        product = self.request.session.get('products')[str(id)]
+        product['category'] = models.Category.objects.filter(
+            name=product['category']
+        ).first()
+
+        form = forms.CreateProductForm(initial=product)
+
+        return self.return_render(form)
+
+    def post(self, request, id, *args, **kwargs):
+        products = self.request.session.get('products')
+        form = forms.CreateProductForm(self.request.POST)
+
+        if form.is_valid():
+            attributes = self.get_attributes(form)
+
+            self.set_product(products, str(id), attributes)
+
+            product = products[str(id)]
+
+            self.request.session['products'][str(id)] = product
+
+            self.request.session.modified = True
+
+            print(self.request.session['products'])
+        else:
+            form = forms.CreateProductForm(initial=attributes)
+
+        return self.return_render(form)
 
 
 class DeleteProductSession(View):

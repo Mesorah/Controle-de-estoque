@@ -1,32 +1,36 @@
-<div>
-    <div>
-        {% for key, product in products.items %}
-            <p>Nome: {{ product.name }}</p>
-            <p>Descrição: {{ product.description }}</p>
-            <p>Estoque: {{ product.stock }}</p>
-            <p>Código de barras: {{ product.barcode }}</p>
-            <p>Categoria: {{ product.category }}</p>
-            <p>Preço de custo: R$ {{ product.cost_price }}</p>
-            <p>Preço de venda: R$ {{ product.sale_price }}</p>
+{% extends "base.html" %}
 
-            <form action="{% url 'product:delete' key %}" method="post">
+{% block content %}
+    <div>
+        <div>
+            {% for key, product in products.items %}
+                <p>Nome: {{ product.name }}</p>
+                <p>Descrição: {{ product.description }}</p>
+                <p>Estoque: {{ product.stock }}</p>
+                <p>Código de barras: {{ product.barcode }}</p>
+                <p>Categoria: {{ product.category }}</p>
+                <p>Preço de custo: R$ {{ product.cost_price }}</p>
+                <p>Preço de venda: R$ {{ product.sale_price }}</p>
+
+                <form action="{% url 'product:delete' key %}" method="post">
+                    {% csrf_token %}
+
+                    <button type="submit">Remover</button>
+                </form>
+
+                <a href="{% url 'product:update_session' key %}">Update</a>
+
+                <br>
+            {% endfor %}
+
+        </div>
+        
+        <div>
+            <form action="" method="post">
                 {% csrf_token %}
-
-                <button type="submit">Remover</button>
+        
+                <button type="submit">Salvar produtos</button>
             </form>
-
-            <a href="{% url 'product:update_session' key %}">Update</a>
-
-            <br>
-        {% endfor %}
-
+        </div>
     </div>
-    
-    <div>
-        <form action="" method="post">
-            {% csrf_token %}
-    
-            <button type="submit">Salvar produtos</button>
-        </form>
-    </div>
-</div>
+{% endblock content %}

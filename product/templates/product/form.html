@@ -1,16 +1,22 @@
+{% extends "base.html" %}
 {% load static %}
-<form action = "" method = "post" class="product-form">
-    {% csrf_token %}
-    {{ form.as_p }}
 
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <input type="submit" value="Submit">
-</form>
+{% block content %}
+    <div>
+        <form action = "" method = "post" class="product-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock content %}
 
 <script src="{% static 'product/js/form_verify.js' %}"></script>

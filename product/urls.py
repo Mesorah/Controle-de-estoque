@@ -55,4 +55,10 @@ urlpatterns = [
         staff_member(views.Dashboard.as_view()),
         name='dashboard'
     ),
+
+    path(
+        'api/',
+        views.product_list,
+        name='product_list'
+    ),
 ]

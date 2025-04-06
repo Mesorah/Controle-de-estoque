@@ -61,4 +61,9 @@ urlpatterns = [
         views.product_list,
         name='product_list'
     ),
+    path(
+        'api/<int:pk>/',
+        views.product_detail,
+        name='product_detail'
+    ),
 ]

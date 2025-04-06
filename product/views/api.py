@@ -31,13 +31,19 @@ def product_list(request):
         )
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PATCH', 'DELETE'])
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
     if request.method == 'GET':
-        serializer = ProductSerializer(
-            instance=product,
-        )
+        serializer = ProductSerializer(instance=product)
 
         return Response(serializer.data)
+
+    elif request.method == 'PATCH':
+        pass
+
+    elif request.method == 'DELETE':
+        product.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -58,12 +58,12 @@ urlpatterns = [
 
     path(
         'api/',
-        views.product_list,
+        views.ProductListAPIView.as_view(),
         name='product_list'
     ),
     path(
         'api/<int:pk>/',
-        views.product_detail,
+        views.ProductDetailAPIView.as_view(),
         name='product_detail'
     ),
 ]

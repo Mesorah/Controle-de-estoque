@@ -146,3 +146,9 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+# DRF
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', # noqa E501
+    'PAGE_SIZE': 100
+}
